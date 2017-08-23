@@ -1,0 +1,11 @@
+C:\Development\CUOnline\SandboxCore\SandboxCore\obj\Debug\netcoreapp1.1\SandboxCore.csprojResolveAssemblyReference.cache
+C:\Development\CUOnline\SandboxCore\SandboxCore\obj\Debug\netcoreapp1.1\SandboxCore.csproj.CoreCompileInputs.cache
+C:\Development\CUOnline\SandboxCore\SandboxCore\obj\Debug\netcoreapp1.1\SandboxCore.AssemblyInfoInputs.cache
+C:\Development\CUOnline\SandboxCore\SandboxCore\obj\Debug\netcoreapp1.1\SandboxCore.AssemblyInfo.cs
+C:\Development\CUOnline\SandboxCore\SandboxCore\bin\Debug\netcoreapp1.1\SandboxCore.deps.json
+C:\Development\CUOnline\SandboxCore\SandboxCore\bin\Debug\netcoreapp1.1\SandboxCore.runtimeconfig.json
+C:\Development\CUOnline\SandboxCore\SandboxCore\bin\Debug\netcoreapp1.1\SandboxCore.runtimeconfig.dev.json
+C:\Development\CUOnline\SandboxCore\SandboxCore\bin\Debug\netcoreapp1.1\SandboxCore.dll
+C:\Development\CUOnline\SandboxCore\SandboxCore\bin\Debug\netcoreapp1.1\SandboxCore.pdb
+C:\Development\CUOnline\SandboxCore\SandboxCore\obj\Debug\netcoreapp1.1\SandboxCore.dll
+C:\Development\CUOnline\SandboxCore\SandboxCore\obj\Debug\netcoreapp1.1\SandboxCore.pdb
