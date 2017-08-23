@@ -52,7 +52,7 @@ namespace SandboxCore.Controllers
             {
                 // Api request to create new course
                 CourseClient courseClient = new CourseClient(long.Parse(Environment.GetEnvironmentVariable("SandboxAccountId")));
-                var courseName = $"sandbox_{ltiParams["lis_person_name_full"]}".Replace("_", " ");
+                var courseName = $"sandbox_{ltiParams["lis_person_name_full"]}".Replace(" ", "_");
                 Course createdCourse = await courseClient.CreateCourse(courseName);
                 
                 EnrollmentsClient enrollmentclient = new EnrollmentsClient(createdCourse.Id);
