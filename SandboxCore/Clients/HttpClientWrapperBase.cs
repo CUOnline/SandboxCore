@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using System.Text;
+using Microsoft.Extensions.Configuration;
 
 namespace SandboxCore.Clients
 {
@@ -12,11 +13,11 @@ namespace SandboxCore.Clients
     {
         protected readonly string baseUrl;
         private HttpClient httpClient;
-        readonly CustomDelegatingHandler customDelegatingHandler = new CustomDelegatingHandler();
 
-        protected HttpClientWrapperBase()
+        protected HttpClientWrapperBase(IConfiguration configuration)
         {
-            baseUrl = Environment.GetEnvironmentVariable("BaseUrl") + "api/v1";
+            CustomDelegatingHandler customDelegatingHandler = new CustomDelegatingHandler(configuration);
+            baseUrl = configuration["CanvasSettings:BaseUrl"] + "api/v1";
             baseUrl = baseUrl.Trim('/');
             httpClient = new HttpClient(customDelegatingHandler);
         }

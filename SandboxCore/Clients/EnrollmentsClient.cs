@@ -4,12 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 
 namespace SandboxCore.Clients
 {
     public class EnrollmentsClient : ClientBase
     {
-        public EnrollmentsClient(long? courseId) : base($"courses/{courseId}/enrollments") { }
+        public EnrollmentsClient(long? courseId, IConfiguration configuration) : base($"courses/{courseId}/enrollments", configuration) { }
 
         public async Task<Enrollment> EnrollUser(long? userId, EnrollmentType type)
         {
@@ -19,7 +20,7 @@ namespace SandboxCore.Clients
                 Type = type
             };
 
-            string json = JsonConvert.SerializeObject(new EnrollmentWrapper { Enrollment = enrollment }, 
+            string json = JsonConvert.SerializeObject(new EnrollmentWrapper { Enrollment = enrollment },
                 Formatting.None, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
 
             ApiPath = ApiController;

@@ -8,5 +8,6 @@ namespace SandboxCore.Models
     public class SandboxViewModel
     {
         public int StatusCode { get; set; }
+        public string BaseUrl { get; set; }
     }
 }

@@ -13,7 +13,7 @@
     else
     {
         <p>
-            Course created. <a href='@Environment.GetEnvironmentVariable("BaseUrl")courses'>Go to courses page</a>
+            Your sandbox course has been created. <a href='@string.Format($"{Model.BaseUrl}courses")' target="_parent">Go to the courses page</a> to view your new sandbox course.
         </p>
     }
 </div>

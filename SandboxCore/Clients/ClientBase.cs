@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 
 namespace SandboxCore.Clients
 {
@@ -8,7 +9,7 @@ namespace SandboxCore.Clients
         protected string ApiController;
         protected string ApiPath;
 
-        protected ClientBase(string apiController)
+        protected ClientBase(string apiController, IConfiguration configuration) : base (configuration)
         {
             ApiController = apiController;
         }

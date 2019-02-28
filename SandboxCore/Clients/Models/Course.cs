@@ -41,7 +41,7 @@ namespace SandboxCore.Clients.Models
         /// </summary>
         [JsonProperty(PropertyName = "integration_id")]
         public string IntegrationId { get; set; }
-        
+
         /// <summary>
         /// The course code
         /// </summary>

@@ -11,6 +11,7 @@ using System.Xml;
 using Microsoft.AspNetCore.Hosting;
 using System.Xml.Linq;
 using System.Text;
+using Microsoft.Extensions.Configuration;
 
 namespace SandboxCore.Controllers
 {
@@ -19,19 +20,21 @@ namespace SandboxCore.Controllers
         private Dictionary<string, string> LtiParams = new Dictionary<string, string>();
 
         private readonly IHostingEnvironment hostingEnvironment;
+        private readonly IConfiguration configuration;
 
-        public SandboxController(IHostingEnvironment hostingEnvironment)
+        public SandboxController(IConfiguration configuration, IHostingEnvironment hostingEnvironment)
         {
             this.hostingEnvironment = hostingEnvironment;
+            this.configuration= configuration;
         }
 
         public IActionResult Index()
         {
             var configDoc = XDocument.Load(hostingEnvironment.WebRootPath + "/content/lti_config.xml");
-            
+
             StringBuilder sb = new StringBuilder(configDoc.ToString());
-            sb.Replace("{LaunchUrl}", Environment.GetEnvironmentVariable("LaunchUrl"));
-            sb.Replace("{MountPoint}", Environment.GetEnvironmentVariable("MountPoint"));
+            sb.Replace("{LaunchUrl}", configuration["CanvasSettings:LaunchUrl"]);
+            sb.Replace("{MountPoint}", configuration["CanvasSettings:MountPoint"]);
 
             return new ContentResult() { Content = sb.ToString(), ContentType = "text/xml" };
         }
@@ -41,21 +44,22 @@ namespace SandboxCore.Controllers
         {
             var model = new SandboxViewModel()
             {
-                StatusCode = 200
+                StatusCode = 200,
+                BaseUrl = configuration["CanvasSettings:BaseUrl"]
             };
-            
+
             var ltiParams = ParseLtiParams(HttpContext.Request.Form);
-            
-            if (IsValidLtiRequest(Request, ltiParams) 
-                && ltiParams["ext_roles"].Contains("Administrator") 
+
+            if (IsValidLtiRequest(Request, ltiParams)
+                && ltiParams["ext_roles"].Contains("Administrator")
                 || ltiParams["ext_roles"].Contains("Instructor"))
             {
                 // Api request to create new course
-                CourseClient courseClient = new CourseClient(long.Parse(Environment.GetEnvironmentVariable("SandboxAccountId")));
+                CourseClient courseClient = new CourseClient(long.Parse(configuration["CanvasSettings:SandboxAccountId"]), configuration);
                 var courseName = $"sandbox_{ltiParams["lis_person_name_full"]}".Replace(" ", "_");
                 Course createdCourse = await courseClient.CreateCourse(courseName);
-                
-                EnrollmentsClient enrollmentclient = new EnrollmentsClient(createdCourse.Id);
+
+                EnrollmentsClient enrollmentclient = new EnrollmentsClient(createdCourse.Id, configuration);
                 var userId = long.Parse(ltiParams["custom_canvas_user_id"]);
                 await enrollmentclient.EnrollUser(userId, EnrollmentType.TeacherEnrollment);
             }
@@ -64,7 +68,7 @@ namespace SandboxCore.Controllers
                 model.StatusCode = 403;
             }
 
-            Response.Headers.Add("X-Frame-Options", $"ALLOW-FROM {Environment.GetEnvironmentVariable("BaseUrl")}");
+            Response.Headers.Add("X-Frame-Options", $"ALLOW-FROM {configuration["CanvasSettings:BaseUrl"]}");
             return View(model);
         }
 

@@ -1,0 +1,34 @@
+{
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:50290/",
+      "sslPort": 0
+    }
+  },
+  "profiles": {
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "BaseUrl": "https://base.instructure.com/",
+        "ClientId": 10430000000000148,
+        "ClientKey": "canvas_client_key",
+        "CanvasToken": "canvas_api_token",
+        "SandboxAccountId": 4059,
+        "LaunchUrl": "http://application.launchurl/",
+        "MountPoint": "Sandbox/CreateSandbox"
+      }
+    },
+    "SandboxCore": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "http://localhost:50291/"
+    }
+  }
+}

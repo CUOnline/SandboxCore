@@ -50,13 +50,13 @@ namespace SandboxCore.Clients.Models
         /// </summary>
         [JsonProperty(PropertyName = "section_integration_id")]
         public string SectionIntegrationId { get; set; }
-        
+
         /// <summary>
         /// The SIS Section ID in which the enrollment is associated. Only displayed if present. This field is only included if the user has permission to view SIS information.
         /// </summary>
         [JsonProperty(PropertyName = "sis_section_id")]
         public string SisSectionId { get; set; }
-        
+
         /// <summary>
         /// The state of the user's enrollment in the course.
         /// </summary>
